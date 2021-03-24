@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+scikit-learn = "*"
+torch = "*"
+tqdm = "*"
+pyodbc="*"
+python-dotenv="*"
+jinjasql = "*"
+
+[dev-packages]
+black = "==19.3b0"
+flake8 = "*"
+mypy = "*"
+pre-commit = "*"
+
+[requires]
+python_version = "3.7"
