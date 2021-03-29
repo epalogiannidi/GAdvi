@@ -1,0 +1,7 @@
+dataset: sample_tiny
+name: light_fm_simpl"
+dimensions: 256
+loss: warp
+epochs: 20
+user_features: False
+item_featres: False

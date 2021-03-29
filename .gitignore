@@ -1,3 +1,12 @@
 .DS_Store
 .idea/*
 data/
+app/
+
+results
+__pycache__/
+*.py[cod]
+__pycache__
+*.pyc
+
+gadvi/__pycache__
