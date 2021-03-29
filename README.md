@@ -17,6 +17,7 @@ The main source code can be found under `gadvi/`.
 * scripts: scripts for using gadvi model
 
   - Use main.py with the appropriate arguments to fetch the data, analyze the data, train model and predict
+  - scripts/resources/plots contains some plots generated from `gadvi/brain.py`
 
 ### Technology stack
 Written in [Python 3.7](https://www.python.org/). The following Python packages are used:
