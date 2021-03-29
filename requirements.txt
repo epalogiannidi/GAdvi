@@ -1,0 +1,13 @@
+numpy==1.20.1
+pandas==1.2.3
+tqdm==4.59.0
+pyodbc==4.0.30
+python-dotenv==0.16.0
+matplotlib==3.4.0
+seaborn==0.11.1
+lightfm==1.16
+scipy==1.6.2
+flask==1.1.2
+black==19.3b0
+flake8==3.9.0
+mypy==0.812
