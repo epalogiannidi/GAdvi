@@ -4,7 +4,7 @@
 
 * [Overview](#overview)
 * [Development](#development)
-* [How to run](#How toRun)
+* [Run](#run)
 
 ## Overview
 
@@ -97,7 +97,7 @@ To run the code style checks there are various Makefile targets in `Makefile`:
 | ```$ make black ```            | To format the code using black|
 
 
-## How to run
+## Run
 
 ### Train model through scripts
 | Command                 | Description | 
