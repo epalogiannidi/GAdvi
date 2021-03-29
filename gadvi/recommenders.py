@@ -3,7 +3,7 @@ import logging
 import pickle
 import numpy as np
 import pandas as pd
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from lightfm import LightFM
 from lightfm.data import Dataset
 from lightfm.evaluation import precision_at_k, recall_at_k, auc_score
@@ -47,7 +47,7 @@ class LightFMBased:
         self.train_dataset = pickle.load(open(dataset_path, "rb"))
         self.train_data = pickle.load(open(data_path, "rb"))
 
-    def train(self, train: pd.DataFrame) -> (float, float, float):
+    def train(self, train: pd.DataFrame) -> Tuple[float, float, float]:
         """
             Model training
             :param train: the train dataframe
@@ -58,7 +58,7 @@ class LightFMBased:
         dtrain = train[
             ["playerid", "GameName", "RoundCount", "IsSGDContent", "CountryPlayer", "OperatorName", "GameProviderName"]
         ]
-        dtrain["content"] = dtrain["IsSGDContent"].apply(lambda x: 1 if x.lower().strip() == '1st party' else 0)
+        dtrain["content"] = dtrain["IsSGDContent"].apply(lambda x: 1 if x.lower().strip() == "1st party" else 0)
         dtrain["all"] = list(zip(dtrain["playerid"], dtrain["GameName"], dtrain["content"]))
 
         # Fit the dataset
@@ -115,7 +115,7 @@ class LightFMBased:
 
         return p, r, a
 
-    def evaluate(self, test: pd.DataFrame) -> (float, float, float):
+    def evaluate(self, test: pd.DataFrame) -> Tuple[float, float, float]:
         """
             Model evaluating
             :param test: the evaluation dataset
@@ -124,7 +124,7 @@ class LightFMBased:
         # test
         test_dataset = Dataset()
         dtest = test[["playerid", "GameName", "RoundCount", "IsSGDContent"]]
-        dtest["content"] = dtest["IsSGDContent"].apply(lambda x: 1 if x.lower().strip() == '1st party' else 0)
+        dtest["content"] = dtest["IsSGDContent"].apply(lambda x: 1 if x.lower().strip() == "1st party" else 0)
 
         dtest["all"] = list(zip(dtest["playerid"], dtest["GameName"]))
 
@@ -204,7 +204,7 @@ class LightFMBased:
         with open(f"{self.path}/model_{self.name}_{self.d}_{self.loss}_data.pickle", "wb") as fle:
             pickle.dump(self.train_data, fle, protocol=pickle.HIGHEST_PROTOCOL)
 
-    def get_info(self) -> Dict[str,str]:
+    def get_info(self) -> Dict[str, str]:
         """
             Return model information. Currently it returns only the name of the model
             :return: A dictionary with the name of the model

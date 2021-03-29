@@ -4,20 +4,28 @@
 
 * [Overview](#overview)
 * [Development](#development)
+* [How to run](#How toRun)
 
 ## Overview
 
 ### Project Structure
-The source code can be found under `gadvi/`.
+The main source code can be found under `gadvi/`.
+* `gadvi/utils/` contains helper classes and the class for connecting to the database
+* `gadvi/brain.py` is a class with all the required methods for data processing
+* `gadvi/recommenders.py` contains the actual models
 
 * scripts: scripts for using gadvi model
 
+  - Use main.py with the appropriate arguments to fetch the data, analyze the data, train model and predict
+
 ### Technology stack
-Code is written in [Python 3.7](https://www.python.org/). The following Python packages are used:
+Written in [Python 3.7](https://www.python.org/). The following Python packages are used:
 
 * [NumPy](http://www.numpy.org/)
 * [pandas](https://pandas.pydata.org/)
-* [PyTorch](https://pytorch.org/)
+* [LightFM](https://making.lyst.com/lightfm/docs/home.html)
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [pyodbc](https://github.com/mkleehammer/pyodbc/wiki)
 
 ## Development
 
@@ -89,6 +97,27 @@ To run the code style checks there are various Makefile targets in `Makefile`:
 | ```$ make black ```            | To format the code using black|
 
 
+## How to run
+
+### Train model through scripts
+| Command                 | Description | 
+| :---------------------------- |-------------| 
+| ```$ create-datasets -credentials <pathto>.db_credentials -online false -dataset sample_tiny ``` | will establish a database connection with the credentials if online is true else loads saved files|
+| ```$ train -config resources/config.yml -train_path <pathto>train.tsv -test_path <pathto>test.tsv```| will train and evaluate a model given the config files, the train and the test data |
+| ```$ predict -playerid Player_13893025 -model_path <pathto_model>.pickle -dataset_path <pathto_interaction_dataset>_dataset.pickle -data_path <path_to>_data.pickle ```     |Get recommendations for a user |
+
+### Train and predict through runner.sh
+* Instead of running the above commands for train and predict, you can run:
+- ```$  bash runners.sh train``` to train a model
+-```$  bash runners.sh predict``` to predict a model
+
+### Get predictions through the API
+* ```$ python server.py ``` to launch the app
+* ```$ curl http://127.0.0.1:5000/predict?playerid=Player_13893025``` or open a brower and enter the url
 
 
+### Deployment
+
+* deployment.sh contains the commands for deploying a model to an azure registry
+* Dockerfile contains the commands for creating a docker image
 

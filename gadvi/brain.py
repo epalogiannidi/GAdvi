@@ -1,5 +1,4 @@
 import os
-import copy
 import logging
 import pyodbc
 import random
@@ -169,7 +168,7 @@ class DataBrain:
         data = pd.read_sql_query(query, connection)
         return data
 
-    def _train_test_split(self, path: str) -> Tuple[pd.DataFrame,pd.DataFrame] :
+    def _train_test_split(self, path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
             Splits a dataset into train and test
             :param path: path to the dataset
@@ -220,7 +219,7 @@ class DataBrain:
             :return: Νone
         """
         data = self.analysis_report["data"][self.dataset]
-        data["IsSGDContent"] = data["IsSGDContent"].apply(lambda x: 1 if x.lower().strip() == '1st party' else 0)
+        data["IsSGDContent"] = data["IsSGDContent"].apply(lambda x: 1 if x.lower().strip() == "1st party" else 0)
 
         sam = data[["playerid", "GameName", "RoundCount"]]
         samg = sam.groupby("GameName").agg({"playerid": ["nunique", "count"], "RoundCount": "sum"})
@@ -348,6 +347,3 @@ class DataBrain:
         )
         axes[3].set(xlabel="Total GGR", ylabel="Game", title="Total GGR for the top 20 games with the most plays")
         f.savefig(f"{PLOTS_DIR}/{self.dataset}/game_totalplays_{party}.png", bbox_inches="tight")
-
-
-
