@@ -51,8 +51,10 @@ packages as well:
 ```bash
 $ pipenv --python <path-to-3.7>
 $ pipenv install --dev
+$ cp scripts/resources/.db_credentials_template scripts/resources/.db_credentials
 ```
 
+Add the credentials to the new credentials file
 
 Enable the newly-created virtual environment, with:
 ```bash

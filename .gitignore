@@ -9,4 +9,5 @@ __pycache__/
 __pycache__
 *.pyc
 
+scripts/resources/.db_credentials
 gadvi/__pycache__
